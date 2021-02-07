@@ -1,0 +1,20 @@
+version: '3'
+services:
+  snippet_box:
+    build: .
+    restart: always
+    ports:
+    - 4000:4000
+    depends_on:
+      - database
+
+  database:
+    ports:
+      - 5432:5432
+    image: "postgres"
+    env_file:
+      - variables.env
+    volumes:
+      - ./database-data:/var/lib/postgresql/data
+volumes:
+  database-data:
